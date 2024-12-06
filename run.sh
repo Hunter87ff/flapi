@@ -1,2 +1,2 @@
-cd ./src
-fastapi dev app.py
+cd ./app
+fastapi dev main.py
