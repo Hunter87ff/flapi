@@ -40,6 +40,7 @@ class DataGenerator:
         
         base_type, length = match.groups()
         length = int(length) if length else 5
+        if length > 20: length = 20
 
         if base_type == 'int':
             return random.randint(1, 10**length)
@@ -56,7 +57,7 @@ class DataGenerator:
         elif base_type == "company":
             return self.fake.company()
         elif base_type == "password":
-            return self.fake.password()
+            return self.fake.password(length=length or 8)
         elif base_type == "phone":
             return self.generate_mobile_number()
         else:
