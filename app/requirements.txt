@@ -3,4 +3,3 @@ fastapi[standard]
 uvicorn
 faker
 pydantic
-json
