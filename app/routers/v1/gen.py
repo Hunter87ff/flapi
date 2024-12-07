@@ -27,7 +27,7 @@ async def generate_data(
     - List of generated objects
     """
     try:
-        schema = schema or await req.json() or default.GEN_QUERY
+        schema = (schema if schema!=default.GEN_QUERY else None) or await req.json() or default.GEN_QUERY
         schema = str(schema).replace("'", "\"")
 
         # Convert schema string to dictionary

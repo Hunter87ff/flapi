@@ -5,7 +5,6 @@ import json
 import re 
 
 
-
 # this is a demo structure. not the general purpose structure
 structure = {
     "personal" : "dict[name:str:20, dob:date, email:str:30]",

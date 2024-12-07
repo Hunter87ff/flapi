@@ -3,8 +3,13 @@ A free to use api for devs to get data of their given api structure. it helps to
 
 
 
-## Use
-/v1/gen?amount=2
+<details>
+<summary>Example Schema - Response</summary>
+
+**Endpoint**
+> /v1/gen?amount=2
+
+**Schema**
 ```json
 {
   "id": "int:5", 
@@ -21,10 +26,13 @@ A free to use api for devs to get data of their given api structure. it helps to
 
 or 
 ```sh
-v1/gen?amount=2&schema={ "id": "int:5", "name": "name", "date" : "date", "phone" : "phone", "email": "email", "password": "password:10", "clients": "2-list-dict[name:name:10:2, age:int:2, email:email:10]", "books" : "1-list-dict[name:str:10, id:int:5]", "ids" : "2-list-int" }
+curl -X 'GET' \
+  'https://flapi.sprucbot.tech/v1/gen/?amount=1&schema=%7B%22name%22%3A%20%22name%22%2C%20%22age%22%3A%20%22int%3A2%22%2C%20%22email%22%3A%20%22email%22%7D' \
+  -H 'accept: application/json'
 ```
 
-### Output
+
+**Response**
 ```json
 [
   {
@@ -89,3 +97,34 @@ v1/gen?amount=2&schema={ "id": "int:5", "name": "name", "date" : "date", "phone"
   }
 ]
 ```
+</details>
+
+<!--  Dropdown -->
+<details>
+<summary>Example Python Code</summary>
+
+```python
+
+import requests
+
+response = requests.get("https://flapi.sprucbot.tech/v1/gen?amount=2", json={
+    "id": "int:5", 
+    "name": "name", 
+    "date" : "date",
+    "phone" : "phone",
+    "email": "email", 
+    "password": "password:10", 
+    "clients": "2-list-dict[name:name:10:2, age:int:2, email:email:10]",
+    "books" : "1-list-dict[name:str:10, id:int:5]",
+    "ids" : "2-list-int"
+})
+
+if response.status_code == 200:
+    data = response.json()
+    print(data)
+else:
+    print(f"Error: {response.status_code}")
+
+```
+
+</details>
