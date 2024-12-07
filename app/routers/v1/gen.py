@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Query, Request
 import json, core.util as util
+from ext import default
 
 router = APIRouter(
     tags=["Generator"],
@@ -12,17 +13,21 @@ generator = util.DataGenerator()
 async def generate_data(
     req:Request,
     amount: int = Query(default=1, ge=1, le=100),
-    schema: str = Query(default=None)
+    schema: str = Query(default=default.GEN_QUERY)
 ):
     """
-    Generate mock data based on provided schema
+    ### Generate mock data based on provided schema
     
-    :param amount: Number of objects to generate
-    :param schema: JSON-like schema string defining object structure
-    :return: List of generated objects
+    **Parameters**
+    - **amount**: Number of objects to generate
+    - **schema**: JSON-like schema string defining object structure
+    - **json**: It also accepts JSON body with schema
+
+    **Returns**
+    - List of generated objects
     """
     try:
-        schema = schema or await req.json()
+        schema = schema or await req.json() or default.GEN_QUERY
         schema = str(schema).replace("'", "\"")
 
         # Convert schema string to dictionary

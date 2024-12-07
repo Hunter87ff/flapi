@@ -1,0 +1,1 @@
+GEN_QUERY = """{"name": "name", "age": "int:2", "email": "email"}"""
