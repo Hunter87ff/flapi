@@ -1,59 +1,101 @@
-# Structure of data
-# data-type : length : words(string)
-import random, string
+from faker import Faker
+import random
+import datetime
+import json
+import re 
 
-_types = ["int", "float", "str", "email"]
-_payload:dict[str:str] = {
-    "name" : "str:10",
-    "id" : "int:3",
-    "email" : "email:10",
+
+
+# this is a demo structure. not the general purpose structure
+structure = {
+    "personal" : "dict[name:str:20, dob:date, email:str:30]",
+    "academics" : "dict[class:int:2, section:alphabet:1, roll:int:3, marks:2-list-dict[subject:str:20, score:int:2]]",
+    "notices" : "2-list-dict[ title:str:30, date:date, description:str:100]",
+    "exams" : "3-list-dict[subject:str:30, date:date, time:time]",
 }
 
-def generate_int(_length):
-    return int(''.join(random.choices(string.digits, k=_length)))
 
-def generate_float(_length):
-    return float(''.join(random.choices(string.digits, k=_length)))
-
-def generate_str(_length, _words):
-    return ''.join([''.join(random.choices(string.ascii_lowercase, k=_length)) for _ in range(_words)])
-
-def generate_email(_length):
-    return ''.join(random.choices(string.ascii_lowercase, k=_length)) + "@gmail.com"
-
-
-
-
-def generate_data(_type, _length, _words=1):
-    if _type == "int":
-        return generate_int(_length)
-    elif _type == "float":
-        return generate_float(_length)
-    elif _type == "str":
-        return generate_str(_length, _words)
-    elif _type == "email":
-        return generate_email(_length)
-    else:
-        return ("Invalid data type")
+class Generator:
+    def gen_list(self, val):
+        matches = re.match(r'(\d+)-list-(\w+)-(\d+)', val)
+        if matches:
+            amount = int(matches.group(1))
+            data_type = matches.group(2)
+            length = int(matches.group(3))
+            if data_type == "str":
+                return [Faker().text(max_nb_chars=length) for _ in range(amount)]
+            elif data_type == "int":
+                return [random.randint(1, 10**length) for _ in range(amount)]
+            elif data_type == "date":
+                return [Faker().date("%d-%m-%Y") for _ in range(amount)]
+            elif data_type == "time":
+                return [Faker().time() for _ in range(amount)]
+            elif data_type == "dict":
+                return [self.gen_dict(length) for _ in range(amount)]
+            else:
+                raise ValueError(f"Unsupported data type: {data_type}")
+        else:
+            raise ValueError(f"Invalid list specification: {val}")
 
 
 
-def generate_payload(_payload:dict[str:str], _amount:int=10):
-    _obj = []
-    for _ in range(_amount):
-        _data = {}
-        for key in _payload:
-            _features = _payload[key].split(":")
-            _type = _features[0]
-            _length = int(_features[1])
-            _words = int(_features[2] if len(_features) > 2 else 1)
-            _data[key] = generate_data(_type, _length)
-        _obj.append(_data)
-    return _obj
+    def gen_dict(self, structure: dict):
+        fake = Faker()
+        data = {}
+        for key, value in structure.items():
+            print(key, value)
+            if "str" in value:
+                data[key] = fake.text(max_nb_chars=10)
+            elif "int" in value:
+                data[key] = random.randint(1, 1000)
+            elif "date" in value:
+                data[key] = fake.date("%d-%m-%Y")
+            elif "time" in value:
+                data[key] = fake.time()
+            elif "list" in value:
+                data[key] = self.gen_list(value)
+        return data
 
 
-def main():
-    print(generate_payload(_payload))
 
-if __name__ == "__main__":
-    main()
+    def generate_data(self, structure: str):
+        fake = Faker()
+        data = {}
+        for key, value in structure.items():
+            print(key, value)
+            if "str" in value:
+                data[key] = fake.text(max_nb_chars=10)
+            elif "int" in value:
+                data[key] = random.randint(1, 1000)
+            elif "date" in value:
+                data[key] = fake.date("%d-%m-%Y")
+            elif "time" in value:
+                data[key] = fake.time()
+            elif "list" in value:
+                data[key] = self.gen_list(value)
+            elif "dict" in value:
+                data[key] = self.gen_dict(value)
+
+
+    def gen_list_dict(self, val=_exams):
+        _match = re.match(r'(\d+)-list-dict\[(.*)\]', val)
+        if _match:
+            amount = int(_match.group(1))
+            fields_spec = _match.group(2)
+            fields = fields_spec.split(", ")
+            result = []
+            for _ in range(amount):
+                print(fields)
+                result.append(self.generate_data(fields))
+            return result
+    
+
+
+print(Generator().generate_data(structure))
+
+
+
+
+
+
+
