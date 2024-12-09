@@ -1,7 +1,20 @@
-# flapi
+# Flapi
 ![Flapi](./assets/img//flapi3.png)
 
-A free to use api for devs to get data of their given api structure. it helps to make development faster without the headache of data collection.
+Flapi (derived from "Fill API") is a free-to-use service tailored for frontend developers. It generates mock data effortlessly based on your custom schemas, speeding up your workflow and simplifying development.
+
+## Why Flapi?
+
+**Fully Customizable Data:** Define your schema, and Flapi fills it in no time.
+
+**Dynamic Multi-Response:** Flapi can generate different responses for the same schema in one call (amount parameter).
+
+**Frontend-Centric Design:** Build and test interfaces without backend dependencies.
+
+**Completely Free:** Designed with developers in mind to make their lives easier.
+
+**Let Flapi fill your API needs for mock data and take your development to the next level!**
+
 
 
 <details>
@@ -129,3 +142,37 @@ else:
 }
 ```
 </details>
+
+
+
+## Alternatives to Flapi
+
+### 1. Mockaroo
+
+Allows schema-based data generation.
+
+Has a GUI to define schemas but is not API-first and limited without a paid plan.
+
+
+
+### 2. JSONPlaceholder
+
+Provides static, pre-defined mock data.
+
+Cannot generate dynamic data based on custom schemas.
+
+
+
+### 3. Faker.js / FakerPy
+
+A library (not an API) for generating fake data programmatically.
+
+Requires setup and coding; no direct schema-to-data API.
+
+
+
+### 4. QuickMocker
+
+API mocking platform.
+
+Focused on mocking responses, not dynamic data generation.
