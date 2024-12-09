@@ -1,81 +1,76 @@
-# This one seems like more efficient 
+"""
+This file contains the utility functions for the development purpose
+"""
 
-# there will be a web app too, for generating schema 
-import re, random, datetime
+import random, datetime,re
 from faker import Faker
-
-d = {
-  "name" : "name()",
-  "email" : "email()",
-  "addr" : "str(len=6)",
-  "ids" : "list-int(amount=2)",
-  "datas" : {
-    # "_$amount" : 2,
-    "name" : "name()",
-    "position" : "str(len=5)",
-    "clients" : {
-        # "_$amount" : 2,
-        "deal" : "int(len=5)",
-        "name" : "name()",
-        "email" : "email()"
-    }
-  }
-}
-
-def query_parser(query: str) -> dict:
-    """
-    Parse query string and return dictionary of key-value pairs
-    """
-    query = str(query)
-    _data:dict = {}
-    _match = re.match(r'(\w+)\((.*)\)', query)
-    if not _match:
-        return {}
-    _type = _match.group(1)
-    _payload = _match.group(2).replace(r"\\", "")
-    _payload = _payload.split("&")
-    if _payload[0]!='': _data = {re.sub(r"[^a-zA-Z_]", "", str(i.split("=")[0])): i.split("=")[1] for i in _payload}
-    _data["type"] = _type
-    return _data
-
-
+_faker = Faker()
 class Gen:
+    """
+    Utility class for generating mock data based on the provided schema
+    """
+
+    def query_parser(query: str) -> dict:
+        """
+        Parse query string and return dictionary of key-value pairs
+        """
+        query = str(query)
+        _data:dict = {}
+        _match = re.match(r'(\w+)\((.*)\)', query)
+        if not _match:
+            return {}
+        _type = _match.group(1)
+        _payload = _match.group(2).replace(r"\\", "")
+        _payload = _payload.split("&")
+        if _payload[0]!='': _data = {re.sub(r"[^a-zA-Z_]", "", str(i.split("=")[0])): i.split("=")[1] for i in _payload}
+        _data["type"] = _type
+        return _data
+
+
+
     def gen_static(q:str):
+        """
+        Generate static data based on the provided query
+        """
         if isinstance(q, int):
             return q
         if('list' in q):
             return  Gen.gen_list(q.replace("list-", ""))
-        _data =  query_parser(q)
+        _data:dict =  Gen.query_parser(q)
         _type = _data["type"]
         if(_type=="name"):
-            return Faker().name()
+            return _faker.name()
         elif(_type=="email"):
-            return Faker().email()
+            return _faker.email(domain=_data.get("domain", "gmail.com"))
+        elif(_type=="password"):
+            return _faker.password(length=_data.get("len", 8))
         elif(_type=="str"):
-            return Faker().text(max_nb_chars=int(_data.get("len", 5)))
+            return _faker.text(max_nb_chars=int(_data.get("len", 5)))
         elif(_type=="int"):
             length = int(_data["len"])
             return random.randint(10**(length-1), (10**length)-1)
         elif(_type=="time"):
             return datetime.datetime.now().time()
+        elif(_type=="date"):
+            return _faker.date("%d-%m-%Y")
         
 
 
     def gen_list(q):
-        _data:dict = query_parser(q)
+        _data:dict = Gen.query_parser(q)
         _type = _data.get("type")
         if(_type=="int"):
             amount = int(_data.get("amount", 5))
             return [random.randint(1, 1000) for _ in range(amount)]
         elif _type=="str":
             amount = int(_data.get("amount", 5))
-            return [Faker().text(max_nb_chars=10) for _ in range(amount)]
+            return [_faker.text(max_nb_chars=10) for _ in range(amount)]
         elif _type=="name":
             amount = int(_data.get("amount", 5))
-            return [Faker().name() for _ in range(amount)]
+            return [_faker.name() for _ in range(amount)]
         elif _type=="email":
             amount = int(_data.get("amount", 5))
-            return [Faker().email(domain=_data.get("domain", "gmail.com")) for _ in range(amount)]
+            return [_faker.email(domain=_data.get("domain", "gmail.com")) for _ in range(amount)]
         return []
         
         
@@ -94,6 +89,7 @@ class Gen:
                 else : _copy[k] =  Gen.gen_dict(v)
             else:
                 _copy[k] =  Gen.gen_static(v)
+        del d
         return _copy
 
     
@@ -113,31 +109,3 @@ class Gen:
         except Exception as e:
             return {"error": "Invalid schema"}
 
-import time
-
-t = time.time()
-d = Gen.generate_object(d, 4)
-print(d)
-print("Time Taken: ",time.time()-t)
-
-
-
-# import asyncio
-# data = asyncio.run(Gen.gen_dict(d))
-# print(data)
-
-# data = Gen.gen_dict(d)
-# print(data)
-
-# import time
-# from functools import lru_cache
-
-# @lru_cache(maxsize=None)  # Set maxsize to control cache size
-# def fibonacci(n):
-#     if n < 2:
-#         return n
-#     return fibonacci(n - 1) + fibonacci(n - 2)
-# t = time.time()
-# print(fibonacci(30)) 
-# print(fibonacci(30)) 
-# print(time.time()-t)
