@@ -113,7 +113,7 @@ class Gen:
             if(isinstance(v, dict)):
                 _amount = v.get("_$amount")
                 if _amount:
-                    del _copy[k]["_$amount"]
+                    # del _copy[k]["_$amount"]
                     _copy[k] = [ Gen.gen_dict(v) for _ in range(_amount)]
                 else : _copy[k] =  Gen.gen_dict(v)
             else:
