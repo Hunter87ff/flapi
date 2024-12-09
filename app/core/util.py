@@ -3,27 +3,17 @@ This module contains utility functions that are used in the main module.
 """
 
 
-# import string
-# from pydantic import BaseModel, Field
-from typing import Dict, List, Any
+import traceback
+import random, datetime,re
 from faker import Faker
-import random
-import re
+_faker = Faker()
+class Gen:
+    """
+    Utility class for generating mock data based on the provided schema
+    """
 
-
-class DataGenerator:
-    DOMAINS = [
-        "gmail.com",
-        "yahoo.com",
-        "outlook.com",
-        "hotmail.com",
-        "sprucbot.tech"
-    ]
-
-    def __init__(self):
-        self.fake = Faker()
-
-    def generate_mobile_number(self, country_code:int=91) -> str:
+    @staticmethod
+    def generate_mobile_number(country_code:int=91) -> str:
         """
         Generate a random mobile number.
         
@@ -33,90 +23,120 @@ class DataGenerator:
         return f"+{country_code}-{_number_prefix}{random.randint(10_000_000, 99999999)}"
 
 
-    def generate_value(self, type_spec: str) -> Any:
-        match = re.match(r'(\w+)(?::(\d+))?', type_spec)
-        if not match:
-            raise ValueError(f"Invalid type specification: {type_spec}")
-        
-        base_type, length = match.groups()
-        length = int(length) if length else 5
-        if length > 20: length = 20
-
-        if base_type == 'int':
-            return random.randint(1, 10**length)
-        elif base_type == 'str':
-            return self.fake.text(max_nb_chars=length)[:length]
-        elif base_type == 'email':
-            return self.fake.email(domain=random.choice(self.DOMAINS))
-        elif base_type == "name":
-            return self.fake.name()
-        elif base_type == "address":
-            return self.fake.address()
-        elif base_type == "date":
-            return self.fake.date("%d-%m-%Y")
-        elif base_type == "company":
-            return self.fake.company()
-        elif base_type == "password":
-            return self.fake.password(length=length or 8)
-        elif base_type == "phone":
-            return self.generate_mobile_number()
-        else:
-            raise ValueError(f"Unsupported type: {base_type}")
-
-
-
-    def generate_list(self, list_spec: str) -> List[Any]:
+    @staticmethod
+    def query_parser(query: str) -> dict:
         """
-        Generate a list based on the provided specification.
-        
-        :param list_spec: Specification string
-        :return: Generated list
+        Parse query string and return dictionary of key-value pairs
         """
-        # Parse list specification
-        if '-list-int' in list_spec:
-            # Simple list of integers
-            amount = int(list_spec.split('-')[0])
-            return [random.randint(1, 1000) for _ in range(amount)]
-        
-        if '-list-str' in list_spec:
-            # Simple list of strings
-            amount = int(list_spec.split('-')[0])
-            return [self.fake.text(max_nb_chars=10) for _ in range(amount)]
-        
-
-        
-        # List of dictionaries
-        amount_match = re.match(r'(\d+)-list-dict\[(.*)\]', list_spec)
-        if amount_match:
-            amount = int(amount_match.group(1))
-            fields_spec = amount_match.group(2)
-            
-            # Parse individual field specifications
-            fields = re.findall(r'(\w+):(\w+)(?::(\d+))?(?::(\d+))?', fields_spec)
-            
-            return [
-                {field: self.generate_value(f"{field_type}:{length}") 
-                 for field, field_type, length, _ in fields}
-                for _ in range(amount)
-            ]
-        
-        raise ValueError(f"Invalid list specification: {list_spec}")
+        query = str(query)
+        _data:dict = {}
+        _match = re.match(r'(\w+)\((.*)\)', query)
+        if not _match:
+            return {}
+        _type = _match.group(1)
+        _payload = _match.group(2).replace(r"\\", "")
+        _payload = _payload.split("&")
+        if _payload[0]!='': _data = {re.sub(r"[^a-zA-Z_]", "", str(i.split("=")[0])): i.split("=")[1] for i in _payload}
+        _data["type"] = _type
+        return _data
 
 
 
-
-
-    def generate_object(self, schema: Dict[str, str]) -> Dict[str, Any]:
+    @staticmethod
+    def gen_static(q:str):
         """
-        Generate a dictionary object based on the provided schema.
+        Generate static data based on the provided query
+        """
+        if isinstance(q, int):
+            return q
+        if('list' in q):
+            return  Gen.gen_list(q.replace("list-", ""))
+        _data:dict =  Gen.query_parser(q)
+        _type = _data["type"]
+        if(_type=="name"):
+            return _faker.name()
+        elif(_type=="email"):
+            return _faker.email(domain=_data.get("domain", "gmail.com"))
+        elif(_type=="password"):
+            return _faker.password(length=_data.get("len", 8))
+        elif(_type=="text" or _type=="str"):
+            return _faker.text(max_nb_chars=int(_data.get("len", 3)))
+        elif(_type=="int"):
+            length = int(_data.get("len", 3))
+            return random.randint(10**(length-1), (10**length)-1)
+        elif(_type=="time"):
+            return datetime.datetime.now().time()
+        elif(_type=="date"):
+            return _faker.date("%d-%m-%Y")
+        elif _type=="address":
+            return _faker.address()
+        elif _type=="company":
+            return _faker.company()
+        elif _type=="phone":
+            return Gen.generate_mobile_number(country_code=_data.get("code", 91))
+        elif _type=="bool":
+            return random.choice([True, False])
+        elif _type=="float":
+            return random.uniform(1, 100)
+        elif _type=="age":
+            return random.randint(int(_data.get("min",1)), int(_data.get("max", 100)))
+        return "Invalid type"
         
-        :param schema: Dictionary containing field names and their types
+
+
+    def gen_list(q):
+        _data:dict = Gen.query_parser(q)
+        _type = _data.get("type")
+        if(_type=="int"):
+            amount = int(_data.get("amount", 3))
+            return [random.randint(int(_data.get("min", 1)), int(_data.get("max", 100))) for _ in range(amount)]
+        elif _type=="str":
+            amount = int(_data.get("amount", 3))
+            return [_faker.text(max_nb_chars=10) for _ in range(amount)]
+        elif _type=="name":
+            amount = int(_data.get("amount", 2))
+            return [_faker.name() for _ in range(amount)]
+        elif _type=="email":
+            amount = int(_data.get("amount", 2))
+            return [_faker.email(domain=_data.get("domain", "gmail.com")) for _ in range(amount)]
+        return []
+        
+        
+        
+    def gen_dict(d:dict[str]):
+        """
+        Best case = O(n) cause we are iterating over the dict only once
+        Worst case = O(n^2) but still better than the previous one 
+        """
+        _copy = d.copy()
+        for k, v in d.items():
+            if(isinstance(v, dict)):
+                _amount = v.get("_$amount")
+                if _amount:
+                    del _copy[k]["_$amount"]
+                    _copy[k] = [ Gen.gen_dict(v) for _ in range(_amount)]
+                else : _copy[k] =  Gen.gen_dict(v)
+            else:
+                _copy[k] =  Gen.gen_static(v)
+        del d
+        return _copy
+
+    
+    @staticmethod
+    def generate_object(schema: dict, amount:int=1) -> list[dict]:
+        """
+        Generate an object based on the provided schema.
+        
+        :param schema: Schema dictionary
         :return: Generated object
         """
-        obj = {}
-        for key, type_spec in schema.items():
-            if '-list-' in type_spec:
-                obj[key] = self.generate_list(type_spec)
-            else:
-                obj[key] = self.generate_value(type_spec)
-        return obj
+        try:
+            # schema = json.loads(schema)
+            if amount<=1:
+                return  Gen.gen_dict(schema)
+            return [ Gen.gen_dict(schema) for _ in range(amount)]
+        except Exception as e:
+            traceback.print_exc()
+            return {"error": str(e)}
+
+

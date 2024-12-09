@@ -6,7 +6,7 @@ it helps to make development faster without the headache of data collection.
 
 
 from fastapi import FastAPI, Response
-from routers import v1 , dev
+from routers import v1 
 app = FastAPI(
     title="Flapi",
     version="1.0.0",
@@ -23,7 +23,7 @@ async def add_cors_header(request, call_next):
 
 
 app.include_router(v1.apiv1)
-app.include_router(dev.dev)
+# app.include_router(dev.dev)
 @app.get("/", tags=["Home"])
 def home():
     # redirect to /docs

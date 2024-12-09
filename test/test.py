@@ -113,31 +113,8 @@ class Gen:
         except Exception as e:
             return {"error": "Invalid schema"}
 
-import time
-
-t = time.time()
-d = Gen.generate_object(d, 4)
-print(d)
-print("Time Taken: ",time.time()-t)
-
-
-
-# import asyncio
-# data = asyncio.run(Gen.gen_dict(d))
-# print(data)
-
-# data = Gen.gen_dict(d)
-# print(data)
-
 # import time
-# from functools import lru_cache
-
-# @lru_cache(maxsize=None)  # Set maxsize to control cache size
-# def fibonacci(n):
-#     if n < 2:
-#         return n
-#     return fibonacci(n - 1) + fibonacci(n - 2)
 # t = time.time()
-# print(fibonacci(30)) 
-# print(fibonacci(30)) 
-# print(time.time()-t)
+# d = Gen.generate_object(d, 4)
+# print(d)
+# print("Time Taken: ",time.time()-t)
