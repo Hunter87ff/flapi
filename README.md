@@ -1,7 +1,7 @@
 # Flapi
 ![Flapi](./assets/img//flapi3.png)
 
-Flapi (derived from "Fill API") is a free-to-use service tailored for frontend developers. It generates mock data effortlessly based on your custom schemas, speeding up your workflow and simplifying development.
+Flapi (derived from "Fill API" term) is a free-to-use service tailored for frontend developers. It generates mock data effortlessly based on your custom schemas, speeding up your workflow and simplifying development.
 
 ## Why Flapi?
 
