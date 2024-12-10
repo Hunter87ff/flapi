@@ -1,9 +1,8 @@
 # Flapi
 [![](https://img.shields.io/static/v1?label=Donate&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/hunter87ff)  
-[![Language](https://img.shields.io/badge/lang-Python%203.10+-blue)](#)
-[![Repo Size](https://img.shields.io/github/repo-size/hunter87ff/flapi)](#)
+![GitHub Release](https://img.shields.io/github/v/release/hunter87ff/flapi?logo=Github&label=Release)
+[![Language](https://img.shields.io/static/v1?label=Lang&message=Python%203.10&logo=Python&color=blue&logoColor=cyan)](#)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Hunter87ff_flapi&metric=security_rating)](#)
-
 ![Flapi](./assets/img//flapi3.png)
 
 Flapi (derived from "Fill API" term) is a free-to-use service tailored for frontend developers. It generates mock data effortlessly based on your custom schemas, speeding up your workflow and simplifying development.
