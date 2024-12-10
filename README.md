@@ -1,7 +1,7 @@
 # Flapi
 [![](https://img.shields.io/static/v1?label=Donate&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/hunter87ff)  
 ![GitHub Release](https://img.shields.io/github/v/release/hunter87ff/flapi?logo=Github&label=Release)
-[![Language](https://img.shields.io/static/v1?label=Lang&message=Python%203.10&logo=Python&color=blue&logoColor=cyan)](#)
+[![Language](https://img.shields.io/static/v1?label=Lang&message=Python&logo=Python&color=blue&logoColor=cyan)](#)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Hunter87ff_flapi&metric=security_rating)](#)
 ![Flapi](./assets/img//flapi3.png)
 
