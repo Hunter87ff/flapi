@@ -148,5 +148,5 @@ else:
 </details>
 
 
-## Data Types
-Data Types are the types which you have to define in the schema for example `name()` make sure that it ends with `(` and `)`
+## [Data Types](./types#types)
+Data Types are the types which you have to define in the schema for example [`name()`](types#name) make sure that it ends with `(` and `)`
