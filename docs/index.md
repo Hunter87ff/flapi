@@ -20,8 +20,7 @@ Flapi (derived from "Fill API" term) is a free-to-use service tailored for front
 
 
 
-<details>
-<summary>Example Python Code</summary>
+### Example Python Code
 
 ```py
 
@@ -58,7 +57,7 @@ else:
 
 ```
 
-</details>
+
 
 
 
@@ -93,9 +92,7 @@ else:
 }
 ```
 
-<details>
-<summary>Response</summary>
-
+### Response
 
 ```json
 {
@@ -144,7 +141,7 @@ else:
   ]
 }
 ```
-</details>
+
 
 
 ## [Data Types](./types#types)
