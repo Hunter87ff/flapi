@@ -23,7 +23,7 @@ Flapi (derived from "Fill API" term) is a free-to-use service tailored for front
 <details>
 <summary>Example Python Code</summary>
 
-```python
+```py
 
 import requests
 
