@@ -35,7 +35,7 @@ class Gen:
             return {}
         _type = _match.group(1)
         _payload = _match.group(2).replace(r"\\", "")
-        _payload = _payload.split("&")
+        _payload = _payload.split("$")
         if _payload[0]!='': _data = {re.sub(r"[^a-zA-Z_]", "", str(i.split("=")[0])): i.split("=")[1] for i in _payload}
         _data["type"] = _type
         return _data

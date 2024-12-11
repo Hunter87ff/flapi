@@ -36,7 +36,8 @@ async def generate_data(
 
     try:
         schema = schema or _json or default.GEN_QUERY
-        schema = str(schema).replace("'", '"')
+        schema = str(schema).replace("'", '"').replace("\n", "").replace("\t", "").replace(" ", "")
+        print(schema)
         schema_dict = json.loads(str(schema))
         return  util.Gen.generate_object(schema_dict, amount)
     

@@ -28,27 +28,28 @@ Flapi (derived from "Fill API" term) is a free-to-use service tailored for front
 
 import requests
 
-response = requests.get("https://flapi.sprucbot.tech/v1/gen?amount=2", json={
-  "name" : "name()",
-  "email" : "email(domain=hg.co)",
-  "age" : "age(min=78&max=200)",
-  "address" : "address()",
-  "created_at" : "date()",
-  "phone" : "phone(code=87)",
-  "ids" : "list-str(amount=3)",
-  
-  "employee" : {
-    "_$amount" : 2,
-    "name" : "name()",
-    "position" : "text(len=5)",
-    "clients" : {
-        "_$amount" : 3,
-        "deal" : "int(len=5)",
+response = requests.get(
+    "https://flapi.sprucbot.tech/v1/gen?amount=2", 
+    json={
         "name" : "name()",
-        "email" : "email(domain=hg.co)"
+        "email" : "email(domain=hg.co)",
+        "age" : "age(min=78$max=200)",
+        "address" : "address()",
+        "created_at" : "date()",
+        "phone" : "phone(code=87)",
+        "ids" : "list-int(amount=3$max=2)",
+        "employee" : {
+            "_$amount" : 1,
+            "name" : "name()",
+            "position" : "text(len=5)",
+            "clients" : {
+                "_$amount" : 2,
+                "deal" : "int(len=5)",
+                "name" : "name()",
+                "email" : "email(domain=hg.co)"
+            }
+        }
     }
-  }
-}
 )
 
 if response.status_code == 200:
@@ -74,18 +75,17 @@ else:
 {
   "name" : "name()",
   "email" : "email(domain=hg.co)",
-  "age" : "age(min=78&max=200)",
+  "age" : "age(min=78$max=200)",
   "address" : "address()",
   "created_at" : "date()",
   "phone" : "phone(code=87)",
-  "ids" : "list-str(amount=3)",
-  
+  "ids" : "list-int(amount=3$max=2)",
   "employee" : {
-    "_$amount" : 2,
+    "_$amount" : 1,
     "name" : "name()",
     "position" : "text(len=5)",
     "clients" : {
-        "_$amount" : 3,
+        "_$amount" : 2,
         "deal" : "int(len=5)",
         "name" : "name()",
         "email" : "email(domain=hg.co)"
@@ -97,50 +97,34 @@ else:
 <details>
 <summary>Response</summary>
 
-
 ```json
 {
-  "name": "Cindy Bishop",
-  "email": "zwhitaker@hg.co",
-  "age": 168,
-  "address": "109 Howard Gateway\nLake Virginia, PR 82965",
-  "created_at": "06-03-1998",
-  "phone": "+87-9528360459",
-  "ids": [
-    "Result.",
-    "Their.",
-    "Open."
-  ],
+  "name": "Jennifer Huynh",
+  "email": "kristenturner@hg.co",
+  "age": 125,
+  "address": "959 Holden Corner Apt. 103\nEast Matthew, IN 93214",
+  "created_at": "18-12-2003",
+  "phone": "+87-9487346280",
+  "ids": [1,2,1],
   "employee": [
     {
-      "name": "James Franco",
-      "position": "Gas.",
+      "_$amount": 1,
+      "name": "Jason Hartman",
+      "position": "PM.",
       "clients": [
         {
-          "deal": 20410,
-          "name": "Christopher Jones",
-          "email": "oconnorjerry@hg.co"
+          "_$amount": 2,
+          "deal": 55503,
+          "name": "Nicole Parker",
+          "email": "yhopkins@hg.co"
         },
         {
-          "deal": 81891,
-          "name": "Victor Mason",
-          "email": "ishepherd@hg.co"
-        },
-        {
-          "deal": 51615,
-          "name": "George Parsons",
-          "email": "lindsayharvey@hg.co"
+          "_$amount": 2,
+          "deal": 35965,
+          "name": "Mark Thomas",
+          "email": "kirsten79@hg.co"
         }
       ]
-    },
-    {
-      "name": "Jacob Beltran",
-      "position": "Air.",
-      "clients": {
-        "deal": 30514,
-        "name": "Susan Stark",
-        "email": "garciajames@hg.co"
-      }
     }
   ]
 }
