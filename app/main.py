@@ -6,6 +6,9 @@ it helps to make development faster without the headache of data collection.
 
 
 from fastapi import FastAPI, Response
+from fastapi.templating import Jinja2Templates
+from fastapi.requests import Request
+templates = Jinja2Templates(directory="templates")
 from routers import v1 
 app = FastAPI(
     title="Flapi",
@@ -23,8 +26,6 @@ async def add_cors_header(request, call_next):
 
 
 app.include_router(v1.apiv1)
-# app.include_router(dev.dev)
-@app.get("/", tags=["Home"])
-def home():
-    # redirect to /docs
-    return Response(status_code=307, headers={"Location": "/docs"})
+@app.get("/")
+def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})

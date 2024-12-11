@@ -11,11 +11,11 @@ router = APIRouter(
 )
 
 @router.get("/")
+@router.post("/")
 async def generate_data(
     req:Request,
     amount: int = Query(default=1, ge=1, le=100),
     schema: str = Query(default=None)
-    
 ):
     """
     ### Dev Generate mock data based on provided schema
@@ -36,7 +36,6 @@ async def generate_data(
 
     try:
         schema = schema or _json or default.GEN_QUERY
-
         schema = str(schema).replace("'", '"')
         schema_dict = json.loads(str(schema))
         return  util.Gen.generate_object(schema_dict, amount)

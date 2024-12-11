@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flapi - Dynamic Mock Data API</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind Dark Mode Configuration
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans leading-normal tracking-normal">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-30 top-0 bg-gray-800 shadow-lg">
+        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4 px-4">
+            <div class="flex items-center">
+                <a class="text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
+                    Flapi
+                </a>
+            </div>
+            <div class="block lg:hidden pr-4">
+                <button id="nav-toggle" class="flex items-center p-1 text-pink-800 hover:text-gray-900">
+                    <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <title>Menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-gray-800 lg:bg-transparent z-20" id="nav-content">
+                <ul class="list-reset lg:flex justify-end flex-1 items-center">
+                    <li class="mr-3">
+                        <a href="#features" class="inline-block py-2 px-4 text-white hover:text-pink-500 no-underline">Features</a>
+                    </li>
+                    <li class="mr-3">
+                        <a href="#example" class="inline-block py-2 px-4 text-white hover:text-pink-500 no-underline">Example</a>
+                    </li>
+                    <li class="mr-3">
+                        <a href="./docs" class="inline-block py-2 px-4 text-white hover:text-pink-500 no-underline">Documentation</a>
+                    </li>
+                    <li class="mr-3">
+                        <a href="#docs" class="inline-block py-2 px-4 text-white no-underline bg-pink-700 hover:bg-pink-600 rounded-full">Get Started</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="pt-24 md:pt-36 bg-gray-900">
+        <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+            <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
+                <h1 class="my-4 text-5xl font-bold leading-tight text-white">Flapi: Fill Your API with Mock Data</h1>
+                <p class="leading-normal text-gray-300 text-base md:text-2xl mb-8">
+                    Generate dynamic, customizable mock data effortlessly for frontend development.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#docs" class="mx-auto lg:mx-0 bg-pink-700 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                        Get Started
+                    </a>
+                    <a href="#example" class="mx-auto lg:mx-0 bg-transparent text-pink-700 font-bold border-2 border-pink-700 rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                        See Example
+                    </a>
+                </div>
+            </div>
+            <div class="w-full md:w-3/5 py-6">
+                <pre class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <code class="language-python">
+import requests
+
+response = requests.get(
+    "https://flapi.sprucbot.tech/v1/gen", 
+    json={
+        "name": "name()",
+        "email": "email()",
+        "age": "age(min=18)"
+    }
+)
+data = response.json()
+</code>
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="bg-gray-800 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Why Choose Flapi?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-700 p-6 rounded-lg text-center">
+                    <svg class="mx-auto h-16 w-16 text-pink-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-4 text-white">Fully Customizable</h3>
+                    <p class="text-gray-300">Define your schema, and Flapi generates precise mock data tailored to your needs.</p>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg text-center">
+                    <svg class="mx-auto h-16 w-16 text-pink-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"></path>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-4 text-white">Dynamic Responses</h3>
+                    <p class="text-gray-300">Generate multiple unique responses with a single schema call.</p>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg text-center">
+                    <svg class="mx-auto h-16 w-16 text-pink-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-4 text-white">Zero Backend Dependencies</h3>
+                    <p class="text-gray-300">Build and test frontend interfaces without waiting for backend implementation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Example Section -->
+    <section id="example" class="bg-gray-900 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Quick Example</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-pink-500">Request Schema</h3>
+                    <pre class="bg-gray-800 p-6 rounded-lg"><code class="language-json">{
+  "name": "name()",
+  "email": "email(domain=hg.co)",
+  "employee": {
+    "_$amount": 2,
+    "name": "name()",
+    "position": "text(len=5)"
+  }
+}</code></pre>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-pink-500">Generated Response</h3>
+                    <pre class="bg-gray-800 p-6 rounded-lg"><code class="language-json">{
+  "name": "James Franco",
+  "email": "contact@hg.co",
+  "employee": [
+    {
+      "name": "Alice Smith",
+      "position": "Sales"
+    },
+    {
+      "name": "Bob Johnson",
+      "position": "Tech"
+    }
+  ]
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">&copy; 2024 Flapi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Nav Toggle
+        document.getElementById('nav-toggle').onclick = function() {
+            document.getElementById('nav-content').classList.toggle('hidden');
+        }
+
+        // Highlight.js initialization
+        document.addEventListener('DOMContentLoaded', (event) => {
+            hljs.highlightAll();
+        });
+    </script>
+</body>
+</html>
