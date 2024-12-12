@@ -17,9 +17,11 @@
     <link rel="stylesheet" href="./static/css/dark.css">
     <script type="text/javascript" src="./static/js/highlight.min.js"></script>
     <style>
-        *::-webkit-scrollbar{
+        /* html::-webkit-scrollbar{
+            background-color: #333;
             display: none;
-        }
+        } */
+
         .w-screen{
             width: 100vw;
         }
@@ -160,41 +162,38 @@ data = response.json()
     </section>
 
     <!-- Example Section -->
-    <section id="example" class="bg-gray-900 py-16 ">
-        <div class="container mx-auto px-4">
+  <section id="example" class="bg-gray-900 py-16 max-w-full">
+        <div class="container ">
             <h2 class="text-4xl font-bold text-center mb-12 text-white">Quick Example</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <div>
                     <h3 class="text-2xl font-semibold mb-4 text-pink-500">Request Schema</h3>
-                    <pre class="bg-gray-800 p-6 rounded-lg">
-                        <code class="language-json">
-                        {
-                        "name": "name()",
-                        "email": "email(domain=hg.co)",
-                        "employee": {
-                                "_$amount": 2,
-                                "name": "name()",
-                                "position": "text(len=5)"
-                            }
-                        }
+                    <pre class="bg-gray-800 rounded-lg max-h-96">
+                        <code class="language-json rounded">
+{
+"name": "name()",
+"email": "email(domain=hg.co)",
+"employee": {
+        "_$amount": 2,
+        "name": "name()",
+    }
+}
                         </code>
                     </pre>
                 </div>
                 <div>
                     <h3 class="text-2xl font-semibold mb-4 text-pink-500">Generated Response</h3>
-                    <pre class="bg-gray-800 p-6 rounded-lg">
-                        <code class="language-json">
+                    <pre class="bg-gray-800 rounded-lg max-h-96">
+                        <code class="language-json rounded">
 {
     "name": "James Franco",
     "email": "contact@hg.co",
     "employee": [
         {
             "name": "Alice Smith",
-            "position": "Sales"
         },
         {
             "name": "Bob Johnson",
-            "position": "Tech"
         }
     ]
 }                       </code>
@@ -203,33 +202,37 @@ data = response.json()
             </div>
         </div>
     </section>
+ 
     <!-- Playground -->
-    <h2 class="text-4xl font-bold text-center mb-12 text-white">Playground</h2>
-    <section class=" xl:flex flex-row w-screen xl:px-32">
-        <div class="block xl:min-w-96 xl:mr-6 w-50p">
+    
+    <section class=" w-screen md:px-32 py-6 bg-gray-800 my-12 rounded">
+        <h2 class="text-4xl font-bold text-center mb-12 text-white">Playground</h2>
+        <div class="container md:flex flex-row">
+        
+        <div class="block md:min-w-96 md:mr-6 w-50p">
             <h3 class="text-2xl font-semibold mb-4 text-pink-500">Request Schema</h3>
-            <textarea  name="" id="_schema" class="bg-gray-800 max-h-80 w-full rounded" cols="50" rows="20">
-                {
-                    "name": "name()",
-                    "email": "email(domain=hg.co)",
-                    "employee": {
-                        "_$amount": 4,
-                        "name": "name()",
-                        "position": "text(len=5)"
-                    }
-                }
+            <textarea  name="" id="_schema" class="bg-gray-700 max-h-80 w-full rounded px-4" cols="50" rows="20">
+{
+    "name": "name()",
+    "email": "email(domain=hg.co)",
+    "employee": {
+        "_$amount": 4,
+        "name": "name()",
+        "position": "text(len=5)"
+    }
+}
             </textarea>
             <input id="fetch" type="button" value="Fetch" class="bg-blue-600 px-4 py-2 rounded m-4">
         </div>
         <!-- output block -->
         <div class="response-block  w-50p">
             <h3 class="text-2xl font-semibold mb-4 text-pink-500">Response</h3>
-            <pre class="bg-gray-800 p-6 rounded-lg overflow-y-scroll w-full max-h-80">
+            <pre class="bg-gray-700 p-6 rounded-lg overflow-y-scroll w-full max-h-80 mb-4">
                 <code id="response" class="response-code w-full language-json"></code>
             </pre>            
         </div>
 
-
+    </div>
     </section>
 
     <!-- Footer -->
