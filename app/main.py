@@ -9,6 +9,7 @@ from fastapi import FastAPI, Response
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.requests import Request
+from fastapi.middleware.cors import CORSMiddleware
 from routers import v1
 from routers.pages import info
 
@@ -22,17 +23,23 @@ app = FastAPI(
 )
 app.mount("/static", static)
 
-# Setup CORS
-@app.middleware("http")
-async def add_cors_header(request, call_next):
-    response:Response = await call_next(request)
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    return response
 
+
+# Setup CORSE
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Include routers
 app.include_router(info.router)
 app.include_router(v1.apiv1)
 
 
-@app.get("/")
+@app.route("/", ["GET", "POST"])
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})

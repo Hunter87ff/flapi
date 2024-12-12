@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flapi - Dynamic Mock Data API</title>
     <!-- SEO -->
     <meta name="description" content="Generate dynamic, customizable mock data effortlessly for frontend development.">
-    <meta name="keywords" content="mock data, mock api, mock data generator, mock data api, mock data service, mock data tool">
+    <meta name="keywords"
+        content="mock data, mock api, mock data generator, mock data api, mock data service, mock data tool">
     <meta name="author" content="Hunter87">
     <meta name="robots" content="index, follow">
     <!-- Favicon -->
@@ -14,7 +16,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.css">
     <link rel="stylesheet" href="./static/css/dark.css">
     <script type="text/javascript" src="./static/js/highlight.min.js"></script>
+    <style>
+        *::-webkit-scrollbar{
+            display: none;
+        }
+        .w-screen{
+            width: 100vw;
+        }
+        .hljs{
+            background: inherit!important;
+        }
+        @media screen and (min-width:1280px) {
+            .max-w-50p{
+                max-width: 50%;
+            }
+            .w-50p{
+                width: 50%;
+            }
+        }
+    </style>
 </head>
+
 <body class="bg-gray-900 text-white font-sans leading-normal tracking-normal">
     <!-- Navigation -->
     <nav class="fixed w-full z-30 top-0 bg-gray-800 shadow-lg">
@@ -28,23 +50,29 @@
                 <button id="nav-toggle" class="flex items-center p-1 text-pink-800 hover:text-gray-900">
                     <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <title>Menu</title>
-                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
                     </svg>
                 </button>
             </div>
-            <div class="w-full flex-grow lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-gray-800 lg:bg-transparent z-20" id="nav-content">
+            <div class="w-full flex-grow lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-gray-800 lg:bg-transparent z-20"
+                id="nav-content">
                 <ul class="list-reset lg:flex justify-end flex-1 items-center">
                     <li class="mr-3">
-                        <a href="#features" class="inline-block py-2 px-4 text-white hover:text-pink-500 no-underline">Features</a>
+                        <a href="#features"
+                            class="inline-block py-2 px-4 text-white hover:text-pink-500 no-underline">Features</a>
                     </li>
                     <li class="mr-3">
-                        <a href="#example" class="inline-block py-2 px-4 text-white hover:text-pink-500 no-underline">Example</a>
+                        <a href="#example"
+                            class="inline-block py-2 px-4 text-white hover:text-pink-500 no-underline">Example</a>
                     </li>
                     <li class="mr-3">
-                        <a href="./docs" class="inline-block py-2 px-4 text-white hover:text-pink-500 no-underline">Documentation</a>
+                        <a href="./docs"
+                            class="inline-block py-2 px-4 text-white hover:text-pink-500 no-underline">Documentation</a>
                     </li>
                     <li class="mr-3">
-                        <a href="#docs" class="inline-block py-2 px-4 text-white no-underline bg-pink-700 hover:bg-pink-600 rounded-full">Get Started</a>
+                        <a href="#docs"
+                            class="inline-block py-2 px-4 text-white no-underline bg-pink-700 hover:bg-pink-600 rounded-full">Get
+                            Started</a>
                     </li>
                 </ul>
             </div>
@@ -60,10 +88,12 @@
                     Generate dynamic, customizable mock data effortlessly for frontend development.
                 </p>
                 <div class="flex space-x-4">
-                    <a href="#docs" class="mx-auto lg:mx-0 bg-pink-700 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                    <a href="#docs"
+                        class="mx-auto lg:mx-0 bg-pink-700 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                         Get Started
                     </a>
-                    <a href="#example" class="mx-auto lg:mx-0 bg-transparent text-pink-700 font-bold border-2 border-pink-700 rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                    <a href="#example"
+                        class="mx-auto lg:mx-0 bg-transparent text-pink-700 font-bold border-2 border-pink-700 rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                         See Example
                     </a>
                 </div>
@@ -94,66 +124,112 @@ data = response.json()
             <h2 class="text-4xl font-bold text-center mb-12 text-white">Why Choose Flapi?</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-gray-700 p-6 rounded-lg text-center">
-                    <svg class="mx-auto h-16 w-16 text-pink-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                    <svg class="mx-auto h-16 w-16 text-pink-500 mb-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z">
+                        </path>
                     </svg>
                     <h3 class="text-xl font-semibold mb-4 text-white">Fully Customizable</h3>
-                    <p class="text-gray-300">Define your schema, and Flapi generates precise mock data tailored to your needs.</p>
+                    <p class="text-gray-300">Define your schema, and Flapi generates precise mock data tailored to your
+                        needs.</p>
                 </div>
                 <div class="bg-gray-700 p-6 rounded-lg text-center">
-                    <svg class="mx-auto h-16 w-16 text-pink-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"></path>
+                    <svg class="mx-auto h-16 w-16 text-pink-500 mb-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0">
+                        </path>
                     </svg>
                     <h3 class="text-xl font-semibold mb-4 text-white">Dynamic Responses</h3>
                     <p class="text-gray-300">Generate multiple unique responses with a single schema call.</p>
                 </div>
                 <div class="bg-gray-700 p-6 rounded-lg text-center">
-                    <svg class="mx-auto h-16 w-16 text-pink-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    <svg class="mx-auto h-16 w-16 text-pink-500 mb-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
                     </svg>
                     <h3 class="text-xl font-semibold mb-4 text-white">Zero Backend Dependencies</h3>
-                    <p class="text-gray-300">Build and test frontend interfaces without waiting for backend implementation.</p>
+                    <p class="text-gray-300">Build and test frontend interfaces without waiting for backend
+                        implementation.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Example Section -->
-    <section id="example" class="bg-gray-900 py-16">
+    <section id="example" class="bg-gray-900 py-16 ">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-12 text-white">Quick Example</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <div>
                     <h3 class="text-2xl font-semibold mb-4 text-pink-500">Request Schema</h3>
-                    <pre class="bg-gray-800 p-6 rounded-lg"><code class="language-json">{
-  "name": "name()",
-  "email": "email(domain=hg.co)",
-  "employee": {
-    "_$amount": 2,
-    "name": "name()",
-    "position": "text(len=5)"
-  }
-}</code></pre>
+                    <pre class="bg-gray-800 p-6 rounded-lg">
+                        <code class="language-json">
+                        {
+                        "name": "name()",
+                        "email": "email(domain=hg.co)",
+                        "employee": {
+                                "_$amount": 2,
+                                "name": "name()",
+                                "position": "text(len=5)"
+                            }
+                        }
+                        </code>
+                    </pre>
                 </div>
                 <div>
                     <h3 class="text-2xl font-semibold mb-4 text-pink-500">Generated Response</h3>
-                    <pre class="bg-gray-800 p-6 rounded-lg"><code class="language-json">{
-  "name": "James Franco",
-  "email": "contact@hg.co",
-  "employee": [
-    {
-      "name": "Alice Smith",
-      "position": "Sales"
-    },
-    {
-      "name": "Bob Johnson",
-      "position": "Tech"
-    }
-  ]
-}</code></pre>
+                    <pre class="bg-gray-800 p-6 rounded-lg">
+                        <code class="language-json">
+{
+    "name": "James Franco",
+    "email": "contact@hg.co",
+    "employee": [
+        {
+            "name": "Alice Smith",
+            "position": "Sales"
+        },
+        {
+            "name": "Bob Johnson",
+            "position": "Tech"
+        }
+    ]
+}                       </code>
+                    </pre>
                 </div>
             </div>
         </div>
+    </section>
+    <!-- Playground -->
+    <h2 class="text-4xl font-bold text-center mb-12 text-white">Playground</h2>
+    <section class=" xl:flex flex-row w-screen xl:px-32">
+        <div class="block xl:min-w-96 xl:mr-6 w-50p">
+            <h3 class="text-2xl font-semibold mb-4 text-pink-500">Request Schema</h3>
+            <textarea  name="" id="_schema" class="bg-gray-800 max-h-80 w-full rounded" cols="50" rows="20">
+                {
+                    "name": "name()",
+                    "email": "email(domain=hg.co)",
+                    "employee": {
+                        "_$amount": 4,
+                        "name": "name()",
+                        "position": "text(len=5)"
+                    }
+                }
+            </textarea>
+            <input id="fetch" type="button" value="Fetch" class="bg-blue-600 px-4 py-2 rounded m-4">
+        </div>
+        <!-- output block -->
+        <div class="response-block  w-50p">
+            <h3 class="text-2xl font-semibold mb-4 text-pink-500">Response</h3>
+            <pre class="bg-gray-800 p-6 rounded-lg overflow-y-scroll w-full max-h-80">
+                <code id="response" class="response-code w-full language-json"></code>
+            </pre>            
+        </div>
+
+
     </section>
 
     <!-- Footer -->
@@ -163,9 +239,12 @@ data = response.json()
         </div>
     </footer>
 
+
+
+    
     <script>
         // Mobile Nav Toggle
-        document.getElementById('nav-toggle').onclick = function() {
+        document.getElementById('nav-toggle').onclick = function () {
             document.getElementById('nav-content').classList.toggle('hidden');
         }
 
@@ -173,6 +252,23 @@ data = response.json()
         document.addEventListener('DOMContentLoaded', (event) => {
             hljs.highlightAll();
         });
+
+        // Fetch Example
+        function get_data() {
+            let _schema = document.getElementById('_schema').value;
+            fetch(`https://flapi.sprucbot.tech/v1/gen`, {
+                method: 'POST',
+                body: _schema,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('response').textContent = JSON.stringify(data, null, 4);
+                    hljs.highlightElement(document.getElementById('response'));
+                });
+        }
+        document.getElementById('fetch').onclick = get_data;
+        get_data();
     </script>
 </body>
+
 </html>
