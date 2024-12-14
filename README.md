@@ -4,7 +4,7 @@
 [![Language](https://img.shields.io/static/v1?label=Lang&message=Python&logo=Python&color=blue&logoColor=cyan)](#)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Hunter87ff_flapi&metric=security_rating)](#)
 
-![Flapi](https://raw.githubusercontent.com/Hunter87ff/flapi/main/assets/img/flapi.png)
+<img src="https://raw.githubusercontent.com/Hunter87ff/flapi/main/assets/img/flapi.png" alt="Flapi" style="width:fit-content; max-width:80%;"/>
 
 Flapi (derived from "Fill API" term) is a free-to-use service tailored for frontend developers. It generates mock data effortlessly based on your custom schemas, speeding up your workflow and simplifying development.
 
@@ -128,6 +128,7 @@ else:
 ## Types and Parameters
 Types and parameters are used to define the schema for the data you want to generate. Here are the available types and parameters:
 
+
 ### Types
 - [**name()**](#name) - Generates a random name.
 - [**email()**](#email) - Generates a random email address with the specified domain.
@@ -135,37 +136,122 @@ Types and parameters are used to define the schema for the data you want to gene
 - [**address()**](#address) - Generates a random address.
 - [**date()**](#date) - Generates a random date.
 - [**phone()**](#phone) - Generates a random phone number with the specified country code.
-- [**list-int()**](#list-int) - Generates a list of random integers with the specified amount and range.
 - [**text()**](#text) - Generates random text with the specified length.
+- [**list-int()**](#list-int) - Generates a list of random integers with the specified amount and range.
+- [**list-str()**](#list-str) - Generates a list of random strings with the specified amount and length.
+- [**object{}**](#object) - Generates an object with the specified keys and types.
+
 
 ## Parameters
 ### name
 - **length** - The length of the name. Default: 10.
+example : 
+```json
+{
+    "name" : "name(length=5)"
+}
+```
+
 
 ### email
 - **domain** - The domain of the email address. Default: gmail.com.
+example : 
+```json
+{
+    "email" : "email(domain=hg.co)"
+}
+```
+
 
 ### age
 - **min** - The minimum age. Default: 18.
 - **max** - The maximum age. Default: 100.
+example : 
+```json
+{
+    "age" : "age(min=78$max=200)"
+}
+```
+
 
 ### address
 - No parameters.
+example : 
+```json
+{
+    "address" : "address()"
+}
+```
+
 
 ### date
 - No parameters.
+example : 
+```json
+{
+    "date" : "date()"
+}
+```
+
 
 ### phone
 - **code** - The country code of the phone number. Default: 1.
+example : 
+```json
+{
+    "phone" : "phone(code=87)"
+}
+```
+
+
+### text
+- **len** - The length of the text. Default: 10.
+example : 
+```json
+{
+    "text" : "text(len=5)"
+}
+```
+
 
 ### list-int
 Every list and object type can have a **_$amount** parameter to specify the number of items to generate.
 - **_$amount** - The number of integers to generate. Default: 5.
 - **min** - The minimum value of the integers. Default: 0.
 - **max** - The maximum value of the integers. Default: 100.
+example : 
+```json
+{
+    "list" : "list-int(amount=2$max=5)"
+}
+```
 
-### text
-- **len** - The length of the text. Default: 10.
+
+### list-str
+- **_$amount** - The number of strings to generate. Default: 5.
+- **len** - The length of the strings. Default: 10.
+example : 
+```json
+{
+    "list" : "list-str(amount=2$len=5)"
+}
+```
+
+
+### object
+- **_$amount** - The number of objects to generate. Default: 1.
+- **<key>** - The key of the object.
+- **<type>** - The type of the object.
+example : 
+```json
+{
+    "obj" : {
+        "_$amount" : 2, //creates a list of 2 objects
+        "name" : "name()",
+        "email" : "email(domain=hg.co)"
+    }
+}
+```
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a pull request or open an issue if you have any suggestions or feedback.
