@@ -43,45 +43,37 @@ class Gen:
 
 
     @staticmethod
-    def gen_static(query:str):
+    def gen_static(query: str):
         """
         Generate static data based on the provided query
         """
         if isinstance(query, int):
             return query
-        if('list' in query):
-            return  Gen.gen_list(query.replace("list-", ""))
-        _data:dict =  Gen.query_parser(query)
+        if 'list' in query:
+            return Gen.gen_list(query.replace("list-", ""))
+
+        _data: dict = Gen.query_parser(query)
         _type = _data["type"]
-        if(_type=="name"):
-            return _faker.name()
-        elif(_type=="email"):
-            return _faker.email(domain=_data.get("domain", "gmail.com"))
-        elif(_type=="password"):
-            return _faker.password(length=_data.get("len", 8))
-        elif(_type=="text" or _type=="str"):
-            return _faker.text(max_nb_chars=int(_data.get("len", 3)))
-        elif(_type=="int"):
-            length = int(_data.get("len", 3))
-            return random.randint(10**(length-1), (10**length)-1)
-        elif(_type=="time"):
-            return datetime.datetime.now().time()
-        elif(_type=="date"):
-            return _faker.date("%d-%m-%Y")
-        elif _type=="address":
-            return _faker.address()
-        elif _type=="company":
-            return _faker.company()
-        elif _type=="phone":
-            return Gen.generate_mobile_number(country_code=_data.get("code", 91))
-        elif _type=="bool":
-            return random.choice([True, False])
-        elif _type=="float":
-            return random.uniform(1, 100)
-        elif _type=="age":
-            return random.randint(int(_data.get("min",1)), int(_data.get("max", 100)))
-        return "Invalid type"
-        
+
+        # Dictionary mapping types to their generator functions
+        type_generators = {
+            "name": lambda: _faker.name(),
+            "email": lambda: _faker.email(domain=_data.get("domain", "gmail.com")),
+            "password": lambda: _faker.password(length=_data.get("len", 8)),
+            "text": lambda: _faker.text(max_nb_chars=int(_data.get("len", 3))),
+            "str": lambda: _faker.text(max_nb_chars=int(_data.get("len", 3))),
+            "int": lambda: random.randint(10**(int(_data.get("len", 3))-1), (10**int(_data.get("len", 3)))-1),
+            "time": lambda: datetime.datetime.now().time(),
+            "date": lambda: _faker.date("%d-%m-%Y"),
+            "address": lambda: _faker.address(),
+            "company": lambda: _faker.company(),
+            "phone": lambda: Gen.generate_mobile_number(country_code=_data.get("code", 91)),
+            "bool": lambda: random.choice([True, False]),
+            "float": lambda: random.uniform(1, 100),
+            "age": lambda: random.randint(int(_data.get("min",1)), int(_data.get("max", 100)))
+        }
+
+        return type_generators.get(_type, lambda: "Invalid type")()
 
 
     def gen_list(q):
