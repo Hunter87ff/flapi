@@ -123,6 +123,16 @@ else:
 }
 ```
 
+## Routes
+Base URL: https://flapi.sprucbot.tech/v1/gen
+### /v1/gen
+Generates mock data based on the provided schema. The schema is passed as a JSON object in the request body. The response will be a JSON object with the generated data. The amount parameter can be used to generate multiple responses with the same schema.
+
+#### Parameters
+
+- **amount** - The number of responses to generate. Default: 1.
+- **schema** - The schema for the data to generate. instead of schema query parameter, you can pass the schema in the request body.
+
 
 ## Types and Parameters
 Types and parameters are used to define the schema for the data you want to generate. Here are the available types and parameters:
