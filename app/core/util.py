@@ -43,15 +43,15 @@ class Gen:
 
 
     @staticmethod
-    def gen_static(q:str):
+    def gen_static(query:str):
         """
         Generate static data based on the provided query
         """
-        if isinstance(q, int):
-            return q
-        if('list' in q):
-            return  Gen.gen_list(q.replace("list-", ""))
-        _data:dict =  Gen.query_parser(q)
+        if isinstance(query, int):
+            return query
+        if('list' in query):
+            return  Gen.gen_list(query.replace("list-", ""))
+        _data:dict =  Gen.query_parser(query)
         _type = _data["type"]
         if(_type=="name"):
             return _faker.name()
@@ -103,22 +103,21 @@ class Gen:
         
         
         
-    def gen_dict(d:dict[str]):
+    def gen_dict(data:dict[str]):
         """
         Best case = O(n) cause we are iterating over the dict only once
         Worst case = O(n^2) but still better than the previous one 
         """
-        _copy = d.copy()
-        for k, v in d.items():
+        _copy = data.copy()
+        for k, v in data.items():
             if(isinstance(v, dict)):
                 _amount = v.get("_$amount")
                 if _amount:
-                    # del _copy[k]["_$amount"]
                     _copy[k] = [ Gen.gen_dict(v) for _ in range(_amount)]
                 else : _copy[k] =  Gen.gen_dict(v)
             else:
                 _copy[k] =  Gen.gen_static(v)
-        del d
+        del data
         return _copy
 
     
@@ -131,7 +130,6 @@ class Gen:
         :return: Generated object
         """
         try:
-            # schema = json.loads(schema)
             if amount<=1:
                 return  Gen.gen_dict(schema)
             return [ Gen.gen_dict(schema) for _ in range(amount)]
