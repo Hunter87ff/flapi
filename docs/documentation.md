@@ -132,6 +132,7 @@ Types and parameters are used to define the schema for the data you want to gene
 ### Types
 - [**name()**](#name) - Generates a random name.
 - [**email()**](#email) - Generates a random email address with the specified domain.
+- [**password()**](#password) - Generates a random password with the specified length.
 - [**age()**](#age) - Generates a random age within the specified range.
 - [**address()**](#address) - Generates a random address.
 - [**date()**](#date) - Generates a random date.
@@ -161,6 +162,16 @@ example :
 ```json
 {
     "email" : "email(domain=hg.co)"
+}
+```
+
+### password
+- **len** - The length of the password. Default: 8.
+
+example : 
+```json
+{
+    "pass" : "password(len=8)"
 }
 ```
 
@@ -222,8 +233,7 @@ example :
 
 
 ### list-int
-Every list and object type can have a **_$amount** parameter to specify the number of items to generate.
-- **_$amount** - The number of integers to generate. Default: 5.
+- **amount** - The number of integers to generate. Default: 5.
 - **min** - The minimum value of the integers. Default: 0.
 - **max** - The maximum value of the integers. Default: 100.
 
@@ -236,7 +246,7 @@ example :
 
 
 ### list-str
-- **_$amount** - The number of strings to generate. Default: 5.
+- **amount** - The number of strings to generate. Default: 5.
 - **len** - The length of the strings. Default: 10.
 
 example : 
@@ -248,9 +258,9 @@ example :
 
 
 ### object
+Object type defination is a bit different from others. It requires a key and a type. The key is the name of the object's property, and the type is the schema of the object property's value. The object type can also have the _$amount parameter to generate multiple objects with the same schema.
 - **_$amount** - The number of objects to generate. Default: 1.
-- **<key>** - The key of the object.
-- **<type>** - The type of the object.
+
 
 example : 
 ```json
@@ -258,7 +268,8 @@ example :
     "obj" : {
         "_$amount" : 2, 
         "name" : "name()",
-        "email" : "email(domain=hg.co)"
+        "email" : "email(domain=hg.co)",
+        "pass" : "password(len=8)"
     }
 }
 ```
