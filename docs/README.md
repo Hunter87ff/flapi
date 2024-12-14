@@ -128,14 +128,14 @@ else:
 Types and parameters are used to define the schema for the data you want to generate. Here are the available types and parameters:
 
 ### Types
-- [**name()**](###name) - Generates a random name.
-- **email()** - Generates a random email address with the specified domain.
-- **age()** - Generates a random age within the specified range.
-- **address()** - Generates a random address.
-- **date()** - Generates a random date.
-- **phone()** - Generates a random phone number with the specified country code.
-- **list-int()** - Generates a list of random integers with the specified amount and range.
-- **text()** - Generates random text with the specified length.
+- [**name()**](#name) - Generates a random name.
+- [**email()**](#email) - Generates a random email address with the specified domain.
+- [**age()**](#age) - Generates a random age within the specified range.
+- [**address()**](#address) - Generates a random address.
+- [**date()**](#date) - Generates a random date.
+- [**phone()**](#phone) - Generates a random phone number with the specified country code.
+- [**list-int()**](#list-int) - Generates a list of random integers with the specified amount and range.
+- [**text()**](#text) - Generates random text with the specified length.
 
 ## Parameters
 ### name
