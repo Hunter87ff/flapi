@@ -20,7 +20,7 @@ Flapi (derived from "Fill API" term) is a free-to-use service tailored for front
 **Let Flapi fill your API needs for mock data and take your development to the next level!**
 
 
-## Example Schema - Request Through Python
+## Example Code
 ```python
 
 import requests
@@ -55,36 +55,6 @@ if response.status_code == 200:
 else:
     print(f"Error: {response.status_code}")
 
-```
-
-
-
-**Endpoint**
-> /v1/gen?amount=2
-
-**Schema**
-
-```json
-{
-  "name" : "name()",
-  "email" : "email(domain=hg.co)",
-  "age" : "age(min=78$max=200)",
-  "address" : "address()",
-  "created_at" : "date()",
-  "phone" : "phone(code=87)",
-  "ids" : "list-int(amount=3$max=2)",
-  "employee" : {
-    "_$amount" : 1,
-    "name" : "name()",
-    "position" : "text(len=5)",
-    "clients" : {
-        "_$amount" : 2,
-        "deal" : "int(len=5)",
-        "name" : "name()",
-        "email" : "email(domain=hg.co)"
-    }
-  }
-}
 ```
 
 
