@@ -164,7 +164,7 @@ Every list and object type can have a **_$amount** parameter to specify the numb
 - **max** - The maximum value of the integers. Default: 100.
 
 ### text
-- **len** - The length of the text. Default: 10.
+- **len** - The length of the text. Default: 6.
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a pull request or open an issue if you have any suggestions or feedback.
