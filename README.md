@@ -4,6 +4,7 @@
 [![Language](https://img.shields.io/static/v1?label=Lang&message=Python&logo=Python&color=blue&logoColor=cyan)](#)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Hunter87ff_flapi&metric=security_rating)](#)
 
+<img src="https://raw.githubusercontent.com/Hunter87ff/flapi/main/assets/img/flapi.png" alt="Flapi" style="width:fit-content; max-width:80%;"/>
 
 Flapi (derived from "Fill API" term) is a free-to-use service tailored for frontend developers. It generates mock data effortlessly based on your custom schemas, speeding up your workflow and simplifying development.
 
@@ -143,17 +144,19 @@ Types and parameters are used to define the schema for the data you want to gene
 
 ## Parameters
 ### name
-- **length** - The length of the name. Default: 10.
+- No parameters.
+
 example : 
 ```json
 {
-    "name" : "name(length=5)"
+    "name" : "name()"
 }
 ```
 
 
 ### email
 - **domain** - The domain of the email address. Default: gmail.com.
+
 example : 
 ```json
 {
@@ -165,6 +168,7 @@ example :
 ### age
 - **min** - The minimum age. Default: 18.
 - **max** - The maximum age. Default: 100.
+
 example : 
 ```json
 {
@@ -175,6 +179,7 @@ example :
 
 ### address
 - No parameters.
+
 example : 
 ```json
 {
@@ -185,6 +190,7 @@ example :
 
 ### date
 - No parameters.
+
 example : 
 ```json
 {
@@ -194,7 +200,8 @@ example :
 
 
 ### phone
-- **code** - The country code of the phone number. Default: 1.
+- **code** - The country code of the phone number. Default: 91.
+
 example : 
 ```json
 {
@@ -205,6 +212,7 @@ example :
 
 ### text
 - **len** - The length of the text. Default: 10.
+
 example : 
 ```json
 {
@@ -218,6 +226,7 @@ Every list and object type can have a **_$amount** parameter to specify the numb
 - **_$amount** - The number of integers to generate. Default: 5.
 - **min** - The minimum value of the integers. Default: 0.
 - **max** - The maximum value of the integers. Default: 100.
+
 example : 
 ```json
 {
@@ -229,6 +238,7 @@ example :
 ### list-str
 - **_$amount** - The number of strings to generate. Default: 5.
 - **len** - The length of the strings. Default: 10.
+
 example : 
 ```json
 {
@@ -241,6 +251,7 @@ example :
 - **_$amount** - The number of objects to generate. Default: 1.
 - **<key>** - The key of the object.
 - **<type>** - The type of the object.
+
 example : 
 ```json
 {
