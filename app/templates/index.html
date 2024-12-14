@@ -260,7 +260,7 @@ data = response.json()
         // Fetch Example
         function get_data() {
             let _schema = document.getElementById('_schema').value;
-            fetch(`https://flapi.sprucbot.tech/v1/gen`, {
+            fetch(`/v1/gen`, {
                 method: 'POST',
                 body: _schema,
             })
