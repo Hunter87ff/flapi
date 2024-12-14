@@ -7,7 +7,7 @@
 
     <!-- HTML Meta Tags -->
     <title>Flapi</title>
-    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
     <meta name="description" content="A free and open source api for generating complex  structured mock data.">
 
     <!-- Google / Search Engine Tags -->
@@ -33,6 +33,18 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css" title="docsify-darklight-theme" type="text/css">
 
     <!-- Google Analytics -->
+     <style>
+        .resp-img{
+            max-width: 100%;
+            height: auto;
+        }
+        @media (min-width: 720px) {
+            .resp-img{
+                max-width: 80%;
+                height: auto;
+            }
+        }
+     </style>
   </head>
 
   <body>
@@ -44,7 +56,7 @@
       window.$docsify = {
         name: "Flapi",
         repo: "hunter87/flapi",
-        search: ["/docs"],
+        search: ["/"],
         darklightTheme: {
           siteFont : "Source Sans Pro, Helvetica Neue",
           defaultTheme : "light",
