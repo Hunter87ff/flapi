@@ -3,7 +3,7 @@
 ![GitHub Release](https://img.shields.io/github/v/release/hunter87ff/flapi?logo=Github&label=Release)
 [![Language](https://img.shields.io/static/v1?label=Lang&message=Python&logo=Python&color=blue&logoColor=cyan)](#)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Hunter87ff_flapi&metric=security_rating)](#)
-![Flapi](../assets/img/flapi.png)
+![Flapi](https://raw.githubusercontent.com/Hunter87ff/flapi/main/assets/img/flapi.png)
 
 Flapi (derived from "Fill API" term) is a free-to-use service tailored for frontend developers. It generates mock data effortlessly based on your custom schemas, speeding up your workflow and simplifying development.
 
@@ -20,10 +20,7 @@ Flapi (derived from "Fill API" term) is a free-to-use service tailored for front
 **Let Flapi fill your API needs for mock data and take your development to the next level!**
 
 
-
-<details>
-<summary>Example Python Code</summary>
-
+## Example Schema - Request Through Python
 ```python
 
 import requests
@@ -60,17 +57,13 @@ else:
 
 ```
 
-</details>
 
-
-
-
-## Example Schema - Response
 
 **Endpoint**
 > /v1/gen?amount=2
 
 **Schema**
+
 ```json
 {
   "name" : "name()",
@@ -94,8 +87,8 @@ else:
 }
 ```
 
-<details>
-<summary>Response</summary>
+
+**Example Response**
 
 ```json
 {
@@ -129,30 +122,52 @@ else:
   ]
 }
 ```
-</details>
 
 
+## Types and Parameters
+Types and parameters are used to define the schema for the data you want to generate. Here are the available types and parameters:
 
-## Alternatives to Flapi
+### Types
+- [**name()**](###name) - Generates a random name.
+- **email()** - Generates a random email address with the specified domain.
+- **age()** - Generates a random age within the specified range.
+- **address()** - Generates a random address.
+- **date()** - Generates a random date.
+- **phone()** - Generates a random phone number with the specified country code.
+- **list-int()** - Generates a list of random integers with the specified amount and range.
+- **text()** - Generates random text with the specified length.
 
-### 1. Mockaroo
+## Parameters
+### name
+- **length** - The length of the name. Default: 10.
 
-Allows schema-based data generation.
+### email
+- **domain** - The domain of the email address. Default: gmail.com.
 
-Has a GUI to define schemas but is not API-first and limited without a paid plan.
+### age
+- **min** - The minimum age. Default: 18.
+- **max** - The maximum age. Default: 100.
 
+### address
+- No parameters.
 
+### date
+- No parameters.
 
-### 2. JSONPlaceholder
+### phone
+- **code** - The country code of the phone number. Default: 1.
 
-Provides static, pre-defined mock data.
+### list-int
+Every list and object type can have a **_$amount** parameter to specify the number of items to generate.
+- **_$amount** - The number of integers to generate. Default: 5.
+- **min** - The minimum value of the integers. Default: 0.
+- **max** - The maximum value of the integers. Default: 100.
 
-Cannot generate dynamic data based on custom schemas.
+### text
+- **len** - The length of the text. Default: 10.
 
+## Contributing
+Contributions are welcome! Please feel free to submit a pull request or open an issue if you have any suggestions or feedback.
 
-
-### 3. QuickMocker
-
-API mocking platform.
-
-Focused on mocking responses, not dynamic data generation.
+## License
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Hunter87ff/flapi/blob/main/LICENSE) for more details.
