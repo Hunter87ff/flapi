@@ -151,15 +151,7 @@ Cannot generate dynamic data based on custom schemas.
 
 
 
-### 3. Faker.js / FakerPy
-
-A library (not an API) for generating fake data programmatically.
-
-Requires setup and coding; no direct schema-to-data API.
-
-
-
-### 4. QuickMocker
+### 3. QuickMocker
 
 API mocking platform.
 
