@@ -17,6 +17,7 @@ static = StaticFiles(directory="templates/static")
 templates = Jinja2Templates(directory="templates")
 
 app = FastAPI(
+    docs_url=None,
     title="Flapi",
     version="1.0.1",
     description="A free and open source api for devs to get data of their given api structure. it helps to make development faster without the headache of data collection.",
@@ -43,3 +44,7 @@ app.include_router(v1.apiv1)
 @app.route("/", ["GET", "POST"])
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
+@app.route("/docs", ["GET", "POST"])
+def docs(request: Request):
+    return Response(status_code=301, headers={"Location": "https://hunter87ff.github.io/flapi/"})
