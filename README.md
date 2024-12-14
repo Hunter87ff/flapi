@@ -256,7 +256,7 @@ example :
 ```json
 {
     "obj" : {
-        "_$amount" : 2, //creates a list of 2 objects
+        "_$amount" : 2, 
         "name" : "name()",
         "email" : "email(domain=hg.co)"
     }
