@@ -7,6 +7,7 @@ import traceback
 import random, datetime,re
 from faker import Faker
 from core.locale import _datetime
+from core.locale._subject import Subject
 
 _faker = Faker()
 class Gen:
@@ -75,8 +76,9 @@ class Gen:
             "age": lambda: random.randint(int(_data.get("min",1)), int(_data.get("max", 100))),
             "description": lambda: _faker.sentence(nb_words=int(_data.get("words", 4))),
             "image": lambda: _faker.image_url(width=int(_data.get("width", 200)), height=int(_data.get("height", 200))),
-            "subject": lambda: _faker.sentence(nb_words=int(_data.get("words", 3))),
+            "subject": lambda: Subject.get_subject(_data.get("category", "computer_science")),
         }
+
 
         return type_generators.get(_type, lambda: "Invalid type")()
 

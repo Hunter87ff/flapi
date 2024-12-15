@@ -117,6 +117,8 @@ Types and parameters are used to define the schema for the data you want to gene
 - [**date()**](#date) - Generates a random date.
 - [**phone()**](#phone) - Generates a random phone number with the specified country code.
 - [**text()**](#text) - Generates random text with the specified length.
+- [**subject()**](#subject) - Generates a random subject.
+- [**description()**](#description) - Generates a random description.
 - [**list-int()**](#list-int) - Generates a list of random integers with the specified amount and range.
 - [**list-str()**](#list-str) - Generates a list of random strings with the specified amount and length.
 - [**object{}**](#object) - Generates an object with the specified keys and types.
@@ -208,6 +210,45 @@ example :
 ```json
 {
     "text" : "text(len=5)"
+}
+```
+
+### subject
+- **category** - The category of the subject. Default: `computer_science`
+ - - Categories : 
+    - - `computer_science` or `cs`
+    - - `science`
+    - - `commerce`
+    - - `arts`
+    - - `engineering`
+    - - `medical`
+    - - `law`
+
+example :
+```json
+{
+    "subject" : "subject(category=commerce)"
+}
+```
+
+### description
+- **words** - The number of words in the description. Default: 3.
+
+example : 
+```json
+{
+    "description" : "description(words=5)"
+}
+```
+
+### Image
+- **width** - The width of the image. Default: 200.
+- **height** - The height of the image. Default: 200.
+
+example : 
+```json
+{
+    "image" : "image(width=300$height=300)"
 }
 ```
 
