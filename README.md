@@ -179,12 +179,13 @@ example :
 
 
 ### date
-- No parameters.
-
+- **between** - The date range. Default: `2000-2024`
+- **format** - The date format. Default: `%d/%m/%Y`
+- **era** - can be `now` so it will generate the current date. 
 example : 
 ```json
 {
-    "date" : "date()"
+    "dob" : "date(between=2000-2006)"
 }
 ```
 
