@@ -6,6 +6,8 @@ This module contains utility functions that are used in the main module.
 import traceback
 import random, datetime,re
 from faker import Faker
+from core.locale import _datetime
+
 _faker = Faker()
 class Gen:
     """
@@ -53,24 +55,27 @@ class Gen:
             return Gen.gen_list(query.replace("list-", ""))
 
         _data: dict = Gen.query_parser(query)
-        _type = _data["type"]
+        _type = _data.get("type")
 
         # Dictionary mapping types to their generator functions
         type_generators = {
             "name": lambda: _faker.name(),
             "email": lambda: _faker.email(domain=_data.get("domain", "gmail.com")),
             "password": lambda: _faker.password(length=_data.get("len", 8)),
-            "text": lambda: _faker.text(max_nb_chars=int(_data.get("len", 3))),
+            "text": lambda: _faker.text(max_nb_chars=int(_data.get("len", 5))),
             "str": lambda: _faker.text(max_nb_chars=int(_data.get("len", 3))),
             "int": lambda: random.randint(10**(int(_data.get("len", 3))-1), (10**int(_data.get("len", 3)))-1),
             "time": lambda: datetime.datetime.now().time(),
-            "date": lambda: _faker.date("%d-%m-%Y"),
+            "date": lambda: _datetime.DateTime.get_date(era=_data.get("era"), format=_data.get("format", "%d/%m/%Y"), between_yr=_data.get("between", "2000-2024")),
             "address": lambda: _faker.address(),
             "company": lambda: _faker.company(),
             "phone": lambda: Gen.generate_mobile_number(country_code=_data.get("code", 91)),
             "bool": lambda: random.choice([True, False]),
             "float": lambda: random.uniform(1, 100),
-            "age": lambda: random.randint(int(_data.get("min",1)), int(_data.get("max", 100)))
+            "age": lambda: random.randint(int(_data.get("min",1)), int(_data.get("max", 100))),
+            "description": lambda: _faker.sentence(nb_words=int(_data.get("words", 4))),
+            "image": lambda: _faker.image_url(width=int(_data.get("width", 200)), height=int(_data.get("height", 200))),
+            "subject": lambda: _faker.sentence(nb_words=int(_data.get("words", 3))),
         }
 
         return type_generators.get(_type, lambda: "Invalid type")()
