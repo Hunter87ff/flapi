@@ -109,6 +109,10 @@ Types and parameters are used to define the schema for the data you want to gene
 
 
 ### Types
+- [**int()**](#int) - Generates a random integer within the specified range.
+- [**float()**](#float) - Generates a random float within the specified range.
+- [**bool()**](#bool) - Generates a random boolean value.
+
 - [**name()**](#name) - Generates a random name.
 - [**email()**](#email) - Generates a random email address with the specified domain.
 - [**password()**](#password) - Generates a random password with the specified length.
@@ -125,6 +129,40 @@ Types and parameters are used to define the schema for the data you want to gene
 
 
 ## Parameters
+
+### int
+- **min** - The minimum value of the integer. Default: 0.
+- **max** - The maximum value of the integer. Default: 100.
+
+example : 
+```json
+{
+    "int" : "int(min=5$max=10)"
+}
+```
+
+### float
+- **min** - The minimum value of the float. Default: 0.0
+- **max** - The maximum value of the float. Default: 100.0
+
+example : 
+```json
+{
+    "float" : "float(min=5$max=10)"
+}
+```
+
+### bool
+- No parameters.
+
+example : 
+```json
+{
+    "bool" : "bool()"
+}
+```
+
+
 ### name
 - No parameters.
 
