@@ -1,5 +1,4 @@
 # This one seems like more efficient 
-
 # there will be a web app too, for generating schema 
 import re, random, datetime
 from faker import Faker
