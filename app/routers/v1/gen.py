@@ -18,14 +18,16 @@ async def generate_data(
     schema: str = Query(default=None)
 ):
     """
-    ### Dev Generate mock data based on provided schema
+    ## Generate mock data based on provided schema
     
-    **Parameters**
-    - **amount**: Number of objects to generate
-    - **schema**: JSON-like schema string defining object structure
-    - **json**: It also accepts JSON body with schema
+    Parameters
+    ----------
+    - amount: Number of objects to generate
+    - schema: JSON-like schema string defining object structure
+    - json: It also accepts JSON body with schema
 
-    **Returns**
+    Returns
+    -------
     - List of generated objects
     """
     _json:dict 
