@@ -8,6 +8,7 @@ Written by : hunter87ff
 
 
 from fastapi import FastAPI, Response
+from middlewares.cache import CacheControlMiddleware
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.requests import Request
@@ -38,6 +39,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+# add cache header 
+app.add_middleware(CacheControlMiddleware)
+
+
+
 # Include routers
 app.include_router(info.router)
 app.include_router(v1.apiv1)
@@ -45,7 +52,10 @@ app.include_router(v1.apiv1)
 
 @app.route("/", ["GET", "POST"])
 def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+
+    response = templates.TemplateResponse("index.html", {"request": request})
+    response.headers["Cache-Control"] = 'public, max-age=3600'
+    return response
 
 @app.route("/docs", ["GET", "POST"])
 def docs(request: Request):
