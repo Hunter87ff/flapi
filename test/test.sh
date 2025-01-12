@@ -1,0 +1,1 @@
+k6 run -d 30s -u 30 ./test.js
