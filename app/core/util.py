@@ -96,7 +96,7 @@ class Gen:
             "str": lambda: [_faker.text(max_nb_chars=10) for _ in range(amount)],
             "name": lambda: [_faker.name() for _ in range(amount)],
             "email": lambda: [_faker.email(domain=_data.get("domain", "gmail.com")) for _ in range(amount)],
-            "subject": lambda: [Subject.get_subject(_data.get("category", "computer_science")) for _ in range(amount)],
+            "subject": lambda: [Subject.get_subject(_data.get("category", "any")) for _ in range(amount)],
         }
         return type_generators.get(_type, lambda: "Invalid type")()
         

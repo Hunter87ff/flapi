@@ -252,15 +252,16 @@ example :
 ```
 
 ### subject
-- **category** - The category of the subject. Default: `computer_science`
+- **category** - The category of the subject. Default: `any`
  - - Categories : 
     - - `computer_science` or `cs`
-    - - `science`
-    - - `commerce`
-    - - `arts`
-    - - `engineering`
-    - - `medical`
-    - - `law`
+    - - `science` : Science related subjects
+    - - `commerce` : Commerce related subjects
+    - - `arts` : Arts related subjects
+    - - `engineering` : Engineering related subjects
+    - - `medical` : Medical related subjects
+    - - `law` : Law related subjects
+    - - `any` : any random subject
 
 example :
 ```json
@@ -290,9 +291,11 @@ example :
 }
 ```
 
+## List Types
+The list types are used to generate a list of values based on the specified schema. 
 
 ### list-int
-- **amount** - The number of integers to generate. Default: 5.
+- **amount** - The number of integers to generate. Default: 3.
 - **min** - The minimum value of the integers. Default: 0.
 - **max** - The maximum value of the integers. Default: 100.
 
@@ -305,13 +308,45 @@ example :
 
 
 ### list-str
-- **amount** - The number of strings to generate. Default: 5.
+- **amount** - The number of strings to generate. Default: 3.
 - **len** - The length of the strings. Default: 10.
 
 example : 
 ```json
 {
     "list" : "list-str(amount=2$len=5)"
+}
+```
+
+### list-name
+- **amount** - The number of names to generate. Default: 3.
+
+example : 
+```json
+{
+    "list" : "list-name(amount=2)"
+}
+```
+
+### list-email
+- **amount** - The number of email addresses to generate. Default: 3.
+- **domain** - The domain of the email addresses. Default: gmail.com.
+
+example : 
+```json
+{
+    "list" : "list-email(amount=2$domain=hg.co)"
+}
+```
+
+### list-subject
+- **amount** - The number of subjects to generate. Default: 3.
+- **category** - The category of the subjects. Default: any.
+
+example : 
+```json
+{
+    "list" : "list-subject(amount=2$category=cs)"
 }
 ```
 

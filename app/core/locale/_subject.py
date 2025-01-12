@@ -7,13 +7,23 @@ class Subject:
     """
 
     @staticmethod
+    def supported_subjects():
+        return [
+            Subject.science, 
+            Subject.commerce,
+            Subject.arts,
+            Subject.computer_science,
+            Subject.engineering,
+            Subject.medical,
+            Subject.law
+        ]
+
+    @staticmethod
     def get_subject(category:str):
         """
         Get a subject based on the category
         """
-        _categories = ["science", "commerce", "arts", "computer_science", "engineering", "medical", "law"]
-        if category=="any":
-            category = random.choice(_categories)
+
         _sub_dict = {
             "science": Subject.science,
             "commerce": Subject.commerce,
@@ -22,7 +32,9 @@ class Subject:
             "cs": Subject.computer_science,
             "engineering": Subject.engineering,
             "medical": Subject.medical,
-            "law": Subject.law
+            "law": Subject.law,
+            "leagal": Subject.law,
+            "any": random.choice(Subject.supported_subjects())
         }
         return _sub_dict.get(category, Subject.computer_science)()
 
