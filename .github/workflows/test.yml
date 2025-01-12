@@ -28,17 +28,15 @@ jobs:
       run: |
         curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && sudo dpkg -i cloudflared.deb && sudo cloudflared service install ${{ secrets.CF_KEY }}
 
-    - name: Setup Deploy
+    - name: Setup  Dependencies
       run: |
         python -m venv .venv
         . .venv/bin/activate
         pip install -r requirements.txt
-        uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
-      #python runner.py
         
-      working-directory: ./app  # Change this to your project's root directory
+      working-directory: ./app  
 
-    # - name: Deploy
-    #   run: |
-    #     gunicorn -w 2 app:app
-    #   # python src/app.py
+    - name: Deployments
+      run: |
+        uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
+```   working-directory: ./app
