@@ -89,19 +89,16 @@ class Gen:
     def gen_list(q):
         _data:dict = Gen.query_parser(q)
         _type = _data.get("type")
-        if(_type=="int"):
-            amount = int(_data.get("amount", 3))
-            return [random.randint(int(_data.get("min", 1)), int(_data.get("max", 100))) for _ in range(amount)]
-        elif _type=="str":
-            amount = int(_data.get("amount", 3))
-            return [_faker.text(max_nb_chars=10) for _ in range(amount)]
-        elif _type=="name":
-            amount = int(_data.get("amount", 2))
-            return [_faker.name() for _ in range(amount)]
-        elif _type=="email":
-            amount = int(_data.get("amount", 2))
-            return [_faker.email(domain=_data.get("domain", "gmail.com")) for _ in range(amount)]
-        return []
+        amount = int(_data.get("amount", 3))
+
+        type_generators = {
+            "int": lambda: [random.randint(int(_data.get("min", 1)), int(_data.get("max", 100))) for _ in range(amount)],
+            "str": lambda: [_faker.text(max_nb_chars=10) for _ in range(amount)],
+            "name": lambda: [_faker.name() for _ in range(amount)],
+            "email": lambda: [_faker.email(domain=_data.get("domain", "gmail.com")) for _ in range(amount)],
+            "subject": lambda: [Subject.get_subject(_data.get("category", "computer_science")) for _ in range(amount)],
+        }
+        return type_generators.get(_type, lambda: "Invalid type")()
         
         
         
