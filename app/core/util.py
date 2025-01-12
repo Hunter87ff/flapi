@@ -89,8 +89,8 @@ class Gen:
     def gen_list(q):
         _data:dict = Gen.query_parser(q)
         _type = _data.get("type")
-        amount = int(_data.get("amount", 3))
-
+        # amount between 1 and 100 only!!
+        amount = min(max(int(_data.get("amount", 3)),1), 100)
         type_generators = {
             "int": lambda: [random.randint(int(_data.get("min", 1)), int(_data.get("max", 100))) for _ in range(amount)],
             "str": lambda: [_faker.text(max_nb_chars=10) for _ in range(amount)],

@@ -39,6 +39,3 @@ def gen_static(query: str):
     if 'list' in query:
         return list_gen(query.replace("list-", ""))
 
-
-print(gen_static(d["books"]))
-print(query_parser(d["books"]))
