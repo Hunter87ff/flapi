@@ -3,6 +3,17 @@ from starlette.middleware.base import BaseHTTPMiddleware
 
 
 class CacheControlMiddleware(BaseHTTPMiddleware):
+    """
+    Middleware to set Cache-Control header for successful GET requests.
+    
+    This middleware sets the Cache-Control header to "public, max-age=3600" for successful GET requests.
+    For other methods/status codes, it sets the Cache-Control header to "no-store" to prevent caching.
+
+    Args:
+        app: The ASGI application.
+        cache_control_header: The value to set for the Cache-Control header.
+        
+    """
     def __init__(self, app, cache_control_header: str = "public, max-age=3600"):
         super().__init__(app)
         self.cache_control_header = cache_control_header
