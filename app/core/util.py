@@ -115,7 +115,13 @@ class Gen:
         
         
         
-    def gen_dict(data:dict[str]):
+    def gen_dict(data: dict[str]) -> dict:
+        """
+        Generate a dictionary based on the provided schema.
+
+        :param data: A dictionary where keys are strings and values can be either static data or another dictionary.
+        :return: A dictionary with generated data based on the provided schema.
+        """
         """
         Generate a dictionary based on the provided schema
         """
