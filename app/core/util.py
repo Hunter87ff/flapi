@@ -8,6 +8,8 @@ import random, datetime,re
 from faker import Faker
 from core.locale import _datetime
 from core.locale._subject import Subject
+from ext.error import NotQuery
+
 
 _faker = Faker()
 class Gen:
@@ -31,18 +33,20 @@ class Gen:
         """
         Parse query string and return dictionary of key-value pairs
         """
-        query = str(query)
-        _data:dict = {}
-        _match = re.match(r'(\w+)\((.*)\)', query)
-        if not _match:
-            return {}
-        _type = _match.group(1)
-        _payload = _match.group(2).replace(r"\\", "")
-        _payload = _payload.split("$")
-        if _payload[0]!='': _data = {re.sub(r"[^a-zA-Z_]", "", str(i.split("=")[0])): i.split("=")[1] for i in _payload}
-        _data["type"] = _type
-        return _data
-
+        try:
+            query = str(query)
+            _data:dict = {}
+            _match = re.match(r'(\w+)\((.*)\)', query)
+            if not _match:
+                return {}
+            _type = _match.group(1)
+            _payload = _match.group(2).replace(r"\\", "")
+            _payload = _payload.split("$")
+            if _payload[0]!='': _data = {re.sub(r"[^a-zA-Z_]", "", str(i.split("=")[0])): i.split("=")[1] for i in _payload}
+            _data["type"] = _type
+            return _data
+        except Exception as e:
+            raise NotQuery(f"Invalid query format: {query}")
 
 
     @staticmethod
@@ -55,14 +59,23 @@ class Gen:
         if 'list' in query:
             return Gen.gen_list(query.replace("list-", ""))
 
-        _data: dict = Gen.query_parser(query)
-        _type = _data.get("type")
+        try:
+            _data: dict = Gen.query_parser(query)
+            _type = _data.get("type")
+        except Exception as e:
+            if isinstance(e, NotQuery):
+                return f"Invalid Query Parameters: {query}"
+            
+        if not _type:
+            return query
+
+
 
         # Dictionary mapping types to their generator functions
         type_generators = {
             "name": lambda: _faker.name(),
             "email": lambda: _faker.email(domain=_data.get("domain", "gmail.com")),
-            "password": lambda: _faker.password(length=_data.get("len", 8)),
+            "password": lambda: _faker.password(length=int(_data.get("len", 8))),
             "text": lambda: _faker.text(max_nb_chars=int(_data.get("len", 5))),
 
             "str": lambda: _faker.text(max_nb_chars=int(_data.get("len", 3))),
@@ -83,7 +96,7 @@ class Gen:
         }
 
 
-        return type_generators.get(_type, lambda: "Invalid type")()
+        return type_generators.get(_type, lambda: query)()
 
 
     def gen_list(q):
@@ -104,20 +117,37 @@ class Gen:
         
     def gen_dict(data:dict[str]):
         """
-        Best case = O(n) cause we are iterating over the dict only once
-        Worst case = O(n^2) but still better than the previous one 
+        Generate a dictionary based on the provided schema
         """
         _copy = data.copy()
-        for k, v in data.items():
-            if(isinstance(v, dict)):
-                _amount = v.get("_$amount")
-                if _amount:
-                    _copy[k] = [ Gen.gen_dict(v) for _ in range(_amount)]
-                else : _copy[k] =  Gen.gen_dict(v)
-            else:
-                _copy[k] =  Gen.gen_static(v)
-        del data
-        return _copy
+        try:
+            # get key and value of the dict
+            for k, v in data.items():
+                # if the value is a dict
+                if(isinstance(v, dict)):
+                    # get the amount of the dict
+                    _amount = min(max(int(v.get("_$amount", 1)),1), 100)
+                    # if the amount is greater than 1, then generate the dict
+                    if _amount:
+                        del v["_$amount"]
+                        _copy[k] = [Gen.gen_dict(v)  for _ in range(_amount) ]
+
+                    # if the amount is 1, then generate the dict
+                    else : 
+                        _copy[k] =  Gen.gen_dict(v)
+                # if the value is not a dict
+                else:
+                    # generate the static data
+                    _copy[k] =  Gen.gen_static(v)
+
+
+            # delete the data
+            del data
+            return _copy
+
+        except Exception as e:
+            traceback.print_exc()
+            return {"error": str(e)}
 
     
     @staticmethod
