@@ -54,7 +54,8 @@ app.include_router(v1.apiv1)
 def home(request: Request):
 
     response = templates.TemplateResponse("index.html", {"request": request})
-    response.headers["Cache-Control"] = 'public, max-age=3600'
+    response.headers["Cache-Control"] = 'public, max-age=31536000, immutable'
+    response.headers["X-Frame-Options"] = "DENY"
     return response
 
 @app.route("/docs", ["GET", "POST"])
