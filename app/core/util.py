@@ -135,8 +135,9 @@ class Gen:
                     _amount = min(max(int(v.get("_$amount", 1)),1), 100)
                     # if the amount is greater than 1, then generate the dict
                     if _amount:
-                        del v["_$amount"]
+                        
                         _copy[k] = [Gen.gen_dict(v)  for _ in range(_amount) ]
+                        #del v["_$amount"]
 
                     # if the amount is 1, then generate the dict
                     else : 
