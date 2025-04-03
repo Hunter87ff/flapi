@@ -114,7 +114,6 @@ class Gen:
         return type_generators.get(_type, lambda: "Invalid type")()
         
 
-    #something went wrong within the try block..
     def gen_dict(data: dict[str]) -> dict:
         """
         Generate a dictionary based on the provided schema.
