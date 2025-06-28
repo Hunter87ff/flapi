@@ -1,0 +1,12 @@
+[project]
+name = "flapi"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "faker>=37.4.0",
+    "fastapi[standard]>=0.115.14",
+    "pydantic>=2.11.7",
+    "uvicorn>=0.34.3",
+]
